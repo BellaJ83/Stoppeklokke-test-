@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Stoppeklokke</title>
+</head>
+<body>
+
+  <h1>Stoppeklokke</h1>
+
+  <p id="visTid">0</p>
+
+  <button onclick="start()">Start</button>
+  <button onclick="runde()">Rundetid</button>
+  <button onclick="stop()">Stop / Blank</button>
+
+  <h2>Rundetider</h2>
+  <ul id="rundetider"></ul>
+
+<script>
+  let tid = 0;
+  let timer = null;
+
+  function start() {
+    if (timer === null) {
+      timer = setInterval(function () {
+        tid++;
+        document.getElementById("visTid").innerHTML = tid;
+      }, 1000);
+    }
+  }
+
+  function runde() {
+    if (timer !== null) {
+      let li = document.createElement("li");
+      li.innerHTML = tid + " sekunder";
+      document.getElementById("rundetider").appendChild(li);
+
+      tid = 0;
+      document.getElementById("visTid").innerHTML = tid;
+    }
+  }
+
+  function stop() {
+    clearInterval(timer);
+    timer = null;
+    tid = 0;
+
+    document.getElementById("visTid").innerHTML = tid;
+    document.getElementById("rundetider").innerHTML = "";
+  }
+</script>
+
+</body>
+</html>
